@@ -6,4 +6,5 @@ export interface ButtonTypes {
   children: ReactNode;
   className?: string;
   type: string;
+  onClick?: () => void;
 }

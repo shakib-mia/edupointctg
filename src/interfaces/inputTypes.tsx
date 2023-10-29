@@ -5,4 +5,5 @@ export interface inputTypes {
   placeholder: string;
   className?: string;
   name: string;
+  required?: boolean;
 }

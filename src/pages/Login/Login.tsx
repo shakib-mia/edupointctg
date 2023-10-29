@@ -1,8 +1,15 @@
-import { FormEvent } from "react";
+import { FormEvent, useContext } from "react";
 import Form from "../../components/Form/Form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { backendUrl } from "../../constants";
+import { toast } from "react-toastify";
+import { AppContext } from "../../App";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { store, setStore } = useContext(AppContext);
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
@@ -11,7 +18,19 @@ const Login = () => {
       password: (e.target as HTMLFormElement).password.value,
     };
 
-    console.log({ email, password });
+    axios
+      .post(backendUrl + "login", { email, password })
+      .then(({ data }) => {
+        // console.log(data);
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+          navigate("/");
+          setStore({ ...store, token: data.token });
+        }
+      })
+      .catch(({ response }) => {
+        toast.error(response.data.message);
+      });
   };
 
   const fields = [
@@ -33,7 +52,7 @@ const Login = () => {
   ];
 
   return (
-    <div className="h-screen bg-gradient-to-r from-[#002c6a] via-[#00419d] to-[#002c6a] flex justify-center items-center">
+    <div className="h-screen flex justify-center items-center">
       <div className="w-1/2 h-fit shadow-2xl rounded p-16 text-white">
         <Form
           submitText="Login"
@@ -43,8 +62,13 @@ const Login = () => {
         />
 
         <div className="text-center mt-5">
-          Don't have an account? <Link to="/register">Register</Link>
+          Don't have an account?{" "}
+          <Link className="underline hover:no-underline" to="/register">
+            Register
+          </Link>
         </div>
+
+        {/* <button onClick={() => signInWithGoogle()}>google</button> */}
       </div>
     </div>
   );
