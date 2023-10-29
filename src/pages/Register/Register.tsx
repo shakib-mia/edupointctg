@@ -111,7 +111,7 @@ const Register = () => {
     };
 
     for (const field of fields) {
-      console.log(field);
+      // console.log(field);
       data[field.name] = field.value;
     }
 

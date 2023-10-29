@@ -27,7 +27,7 @@ const Navbar = () => {
             onMouseEnter={() => setOptions(true)}
             onMouseLeave={() => setOptions(false)}
           >
-            <NavLink to="/profile">{firstName}</NavLink>
+            {firstName}
             {options && (
               <ul className="absolute left-0 top-[22px] mt-1 text-black bg-white">
                 <li>

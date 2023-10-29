@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { FocusEvent, useEffect, useRef, useState } from "react";
 import { inputTypes } from "../../interfaces/inputTypes";
 import gsap from "gsap";
 // import gsap from "gsap";
 
 export const InputField = (props: inputTypes) => {
   const { id, label, className } = props;
-  const [focused, setFocused] = useState(false);
+  // const [focused, setFocused] = useState(false);
   const [value, setValue] = useState(props.value);
   const labelRef = useRef(null);
   // console.log(props);
@@ -15,11 +15,8 @@ export const InputField = (props: inputTypes) => {
   }, [id]);
 
   const handleChange = (e) => {
-    // console.log(props);
     if (!props.onChange) {
       setValue(e.target.value);
-
-      // if(value.length)
     }
   };
 
@@ -36,30 +33,44 @@ export const InputField = (props: inputTypes) => {
   //     });
   //   }
   // }, [focused]);
+  // console.log(props.value, value?.length);
 
   useEffect(() => {
-    // console.log(value);
-    if (focused) {
+    if (props.value) {
+      if (props.value?.length > 0) {
+        gsap.to(labelRef.current, {
+          top: -27,
+          duration: 0.5,
+        });
+      } else {
+        gsap.to(labelRef.current, {
+          top: 0,
+          duration: 0.5,
+        });
+      }
+    }
+  }, [props.value, props.value?.length]);
+
+  const handleFocus = () => {
+    gsap.to(labelRef.current, {
+      top: -27,
+      duration: 0.5,
+    });
+  };
+
+  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
+    if (e.target.value?.length > 0) {
       gsap.to(labelRef.current, {
         top: -27,
         duration: 0.5,
       });
     } else {
-      if (props.value) {
-        if (props.value.length > 0) {
-          gsap.to(labelRef.current, {
-            top: -27,
-            duration: 0.5,
-          });
-        } else {
-          gsap.to(labelRef.current, {
-            top: 0,
-            duration: 0.5,
-          });
-        }
-      }
+      gsap.to(labelRef.current, {
+        top: 0,
+        duration: 0.5,
+      });
     }
-  }, [focused, props.value, props.value?.length]);
+  };
 
   return (
     <>
@@ -80,9 +91,9 @@ export const InputField = (props: inputTypes) => {
           value={props.value}
           onChange={handleChange}
           autoComplete="off"
-          onFocus={() => setFocused(true)}
+          onFocus={handleFocus}
           onBlur={(e) => {
-            setFocused(false);
+            handleBlur(e);
             setValue(e.target.value);
           }}
           className={`px-4 py-2 focus:outline-none rounded-sm w-full mb-3 bg-[#00000000] border-b border-white disabled:cursor-not-allowed text-white ${className} appearance-none`}
