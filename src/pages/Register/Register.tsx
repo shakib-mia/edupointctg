@@ -46,7 +46,6 @@ const Register = () => {
       id: "firstName",
       type: "text",
       name: "firstName",
-      // placeholder: "Enter Your First Name Here",
       required: true,
       value: user?.user.displayName
         ? user.user.displayName?.split(" ")[0] +
@@ -64,7 +63,6 @@ const Register = () => {
       id: "lastName",
       type: "text",
       name: "lastName",
-      // placeholder: "Enter Your last Name Here",
       required: true,
       value: user?.user.displayName?.split(" ")[2] || "",
       disabled: user?.user.displayName
@@ -78,7 +76,6 @@ const Register = () => {
       id: "email",
       type: "email",
       name: "email",
-      // placeholder: "Enter Your Email Address Here",
       required: true,
       value: user?.user.email,
       disabled: user?.user.email,
@@ -89,7 +86,6 @@ const Register = () => {
       id: "password",
       type: "password",
       name: "password",
-      // placeholder: "Enter Your Password Here",
       required: true,
     },
 
@@ -98,7 +94,6 @@ const Register = () => {
       id: "confirm-password",
       type: "password",
       name: "confirmPassword",
-      // placeholder: "Confirm Your Password Here",
       required: true,
     },
   ];
@@ -107,7 +102,6 @@ const Register = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    // console.log(fields);
 
     const data: userData = {
       firstName: "",
@@ -124,9 +118,14 @@ const Register = () => {
     // console.log(data);
     const { email, firstName, lastName, password, confirmPassword } =
       e.target as HTMLFormElement;
-    // console.log(password.value);
 
-    // console.log({ email: email.value });
+    console.log({
+      email: email.value,
+      firstName: firstName.value,
+      lastName: lastName.value,
+      password: password.value,
+      confirmPassword: confirmPassword.value,
+    });
 
     if (password.value === confirmPassword.value) {
       axios

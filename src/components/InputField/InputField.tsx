@@ -23,36 +23,43 @@ export const InputField = (props: inputTypes) => {
     }
   };
 
+  // useEffect(() => {
+  //   if (focused) {
+  //     gsap.to(labelRef.current, {
+  //       top: -27,
+  //       duration: 0.5,
+  //     });
+  //   } else {
+  //     gsap.to(labelRef.current, {
+  //       top: 0,
+  //       duration: 0.5,
+  //     });
+  //   }
+  // }, [focused]);
+
   useEffect(() => {
+    // console.log(value);
     if (focused) {
       gsap.to(labelRef.current, {
         top: -27,
         duration: 0.5,
       });
     } else {
-      gsap.to(labelRef.current, {
-        top: 0,
-        duration: 0.5,
-      });
-    }
-  }, [focused]);
-
-  useEffect(() => {
-    // console.log(value);
-    if (props.value) {
-      if (props.value.length > 0) {
-        gsap.to(labelRef.current, {
-          top: -27,
-          duration: 0.5,
-        });
-      } else {
-        gsap.to(labelRef.current, {
-          top: 0,
-          duration: 0.5,
-        });
+      if (props.value) {
+        if (props.value.length > 0) {
+          gsap.to(labelRef.current, {
+            top: -27,
+            duration: 0.5,
+          });
+        } else {
+          gsap.to(labelRef.current, {
+            top: 0,
+            duration: 0.5,
+          });
+        }
       }
     }
-  }, [props.value, props.value?.length]);
+  }, [focused, props.value, props.value?.length]);
 
   return (
     <>
@@ -72,6 +79,7 @@ export const InputField = (props: inputTypes) => {
           {...props}
           value={props.value}
           onChange={handleChange}
+          autoComplete="off"
           onFocus={() => setFocused(true)}
           onBlur={(e) => {
             setFocused(false);
