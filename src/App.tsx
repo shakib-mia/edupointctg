@@ -50,10 +50,11 @@ const App = () => {
         token: store.token,
       },
     };
+
     if (store.token) {
-      axios
-        .get(backendUrl + "profile", config)
-        .then(({ data }) => setStore({ ...store, ...data }));
+      axios.get(backendUrl + "profile", config).then(({ data }) => {
+        setStore({ ...store, ...data });
+      });
     }
   }, [store, store.token]);
 

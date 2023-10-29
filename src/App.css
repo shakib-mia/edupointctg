@@ -8,3 +8,9 @@ body {
   font-family: "Roboto", sans-serif;
   @apply bg-gradient-to-r from-[#002c6a] via-[#00419d] to-[#002c6a];
 }
+
+/* Prevent input fields from changing background color on autofill */
+input:-webkit-autofill {
+  -webkit-color: #fff;
+  -webkit-box-shadow: 0 0 0 1000px transparent inset !important; /* Use your desired background color */
+}

@@ -8,8 +8,9 @@ interface propTypes {
     id: string;
     type: string;
     name: string;
-    placeholder: string;
+    placeholder?: string;
     required?: boolean;
+    onChange?: () => void;
   }[];
   heading: string;
   submitText: string;
@@ -25,8 +26,8 @@ const Form = ({ handleSubmit, fields, heading, submitText }: propTypes) => {
         <InputField {...item} key={key} />
       ))}
       {/* </div> */}
-      <div className="text-center mt-10">
-        <Button className="w-1/2" type="secondary">
+      <div className="text-center mt-0">
+        <Button className="w-full" type="secondary">
           {submitText}
         </Button>
       </div>
