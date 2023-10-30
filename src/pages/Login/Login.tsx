@@ -65,6 +65,7 @@ const Login = () => {
       id: "email",
       type: "email",
       name: "email",
+      required: true,
       // placeholder: "Enter Your Email Address Here",
     },
 
@@ -73,6 +74,7 @@ const Login = () => {
       id: "password",
       type: "password",
       name: "password",
+      required: true,
       // placeholder: "Enter Your Password Here",
     },
   ];

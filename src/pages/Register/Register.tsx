@@ -119,14 +119,6 @@ const Register = () => {
     const { email, firstName, lastName, password, confirmPassword } =
       e.target as HTMLFormElement;
 
-    console.log({
-      email: email.value,
-      firstName: firstName.value,
-      lastName: lastName.value,
-      password: password.value,
-      confirmPassword: confirmPassword.value,
-    });
-
     if (password.value === confirmPassword.value) {
       axios
         .post(backendUrl + "register", {
